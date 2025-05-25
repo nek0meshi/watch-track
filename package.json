@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "check": "biome check",
+    "check:fix": "biome check --write"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.77.0",
