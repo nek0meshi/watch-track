@@ -59,7 +59,7 @@
 - id
 - title
 - watched_on（nullable）
-- rating
+- rating ... 10段階（UI上は0.5刻みの0~5）
 - memo
 - category_id（外部キー）
 
@@ -71,7 +71,7 @@
 
 ## 6. 技術要件
 
-- React / Next.js / SWR / Zod / React Hooke Form / Prisma
+- React / Next.js / React Query / Zod / React Hooke Form / Prisma
 - データベース：SQLite
 - 認証：なし（初期はローカル利用前提）
 
