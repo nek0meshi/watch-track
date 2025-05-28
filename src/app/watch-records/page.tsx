@@ -2,6 +2,7 @@
 
 import Container from "@/components/layout/Container";
 import FixedFooter from "@/components/layout/FixedFooter";
+import FixedFooter from "@/components/layout/FixedFooter";
 import { useWatchRecords } from "@/hooks/queries/useWatchRecords";
 import Link from "next/link";
 import { WatchRecordBlock } from "./_components/WatchRecordBlock";
