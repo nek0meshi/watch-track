@@ -6,7 +6,7 @@ interface FixedFotoerProps {
 
 export default function FixedFooter({ children }: FixedFotoerProps) {
   return (
-    <div className="fixed bottom-0 w-full">
+    <div className="fixed left-0 bottom-0 w-full">
       <div className="container mx-auto p-4">{children}</div>
     </div>
   );
