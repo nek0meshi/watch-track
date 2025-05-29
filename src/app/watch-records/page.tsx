@@ -2,6 +2,7 @@
 
 import Container from "@/components/layout/Container";
 import FixedFooter from "@/components/layout/FixedFooter";
+import PageTitle from "@/components/typography/PageTitle";
 import AppButton from "@/components/ui/buttons/AppButton";
 import { useWatchRecords } from "@/hooks/queries/useWatchRecords";
 import Link from "next/link";
@@ -12,6 +13,7 @@ export default function WatchRecords() {
 
   return (
     <Container>
+      <PageTitle>鑑賞ログ一覧</PageTitle>
       {data?.map((watchRecord) => (
         <WatchRecordBlock key={watchRecord.id} watchRecord={watchRecord} />
       ))}
