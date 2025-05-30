@@ -1,5 +1,5 @@
+import { z } from "@/lib/zod";
 import dayjs from "dayjs";
-import { z } from "zod";
 
 export const WatchRecordSchema = z.object({
   id: z.string(),
@@ -25,10 +25,7 @@ export type WatchRecordResponse = z.input<typeof WatchRecordSchema>;
 export type WatchRecord = z.infer<typeof WatchRecordSchema>;
 
 export const WatchRecordCreateSchema = z.object({
-  title: z
-    .string()
-    .min(1, { message: "Title is required" })
-    .max(50, { message: "Title is too long" }),
+  title: z.string().min(1).max(50),
   watchedOn: z.string().nullable(),
   rating: z.number().min(0).max(10),
   memo: z.string().nullable(),
