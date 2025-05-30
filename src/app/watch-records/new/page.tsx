@@ -1,8 +1,30 @@
+"use client";
+
+import {
+  type WatchRecordCreate,
+  WatchRecordCreateSchema,
+} from "@/app/schema/watch-record";
+import InputLabel from "@/components/form/InputLabel";
 import Container from "@/components/layout/Container";
 import BreadcrumbItem from "@/components/nav/BreadcrumbItem";
 import Breadcrumbs from "@/components/nav/Breadcrumbs";
 import PageTitle from "@/components/typography/PageTitle";
+import AppButton from "@/components/ui/buttons/AppButton";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 export default function WatchRecordNewPage() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<WatchRecordCreate>({
+    resolver: zodResolver(WatchRecordCreateSchema),
+  });
+
+  const onSubmit = (data: WatchRecordCreate) => {
+    console.log(data);
+  };
+
   return (
     <Container>
       <Breadcrumbs>
@@ -10,7 +32,41 @@ export default function WatchRecordNewPage() {
         <BreadcrumbItem>鑑賞ログ新規作成</BreadcrumbItem>
       </Breadcrumbs>
       <PageTitle>鑑賞ログ新規作成</PageTitle>
-      <div>WatchRecordNew</div>
+      <form
+        className="flex flex-col gap-4 mt-4"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <InputLabel label="作品名" error={errors.title?.message}>
+          <input
+            {...register("title")}
+            type="text"
+            className="input input-sm w-full"
+          />
+        </InputLabel>
+        <InputLabel label="鑑賞日" error={errors.watchedOn?.message}>
+          <input
+            {...register("watchedOn")}
+            type="date"
+            className="input input-sm w-full"
+          />
+        </InputLabel>
+        <InputLabel label="評価" error={errors.rating?.message}>
+          <input
+            {...register("rating")}
+            type="number"
+            className="input input-sm w-full"
+          />
+        </InputLabel>
+        <InputLabel label="メモ" error={errors.memo?.message}>
+          <textarea
+            {...register("memo")}
+            className="textarea textarea-sm w-full"
+          />
+        </InputLabel>
+        <AppButton type="submit" className="btn btn-primary mt-4">
+          作成
+        </AppButton>
+      </form>
     </Container>
   );
 }
