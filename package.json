@@ -18,11 +18,13 @@
     "clsx": "^2.1.1",
     "daisyui": "^5.0.40",
     "dayjs": "^1.11.13",
+    "i18next": "^25.2.1",
     "next": "15.1.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.56.4",
-    "zod": "^3.25.28"
+    "zod": "^3.25.28",
+    "zod-i18n-map": "^2.27.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
