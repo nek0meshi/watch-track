@@ -1,6 +1,16 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+model WatchRecord {
+  id        String    @id @default(uuid())
+  title     String
+  watchedOn DateTime?
+  rating    Int
+  memo      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
 generator client {
   provider = "prisma-client-js"
   output   = "generated/prisma"
