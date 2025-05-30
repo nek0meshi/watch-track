@@ -10,19 +10,29 @@ import BreadcrumbItem from "@/components/nav/BreadcrumbItem";
 import Breadcrumbs from "@/components/nav/Breadcrumbs";
 import PageTitle from "@/components/typography/PageTitle";
 import AppButton from "@/components/ui/buttons/AppButton";
+import { useCreateWatchRecord } from "@/hooks/queries/useWatchRecords";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 export default function WatchRecordNewPage() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<WatchRecordCreate>({
+  } = useForm({
     resolver: zodResolver(WatchRecordCreateSchema),
   });
+  const { mutate: createWatchRecord } = useCreateWatchRecord();
+  const router = useRouter();
 
   const onSubmit = (data: WatchRecordCreate) => {
     console.log(data);
+    try {
+      createWatchRecord(data);
+      router.push("/watch-records");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -52,7 +62,7 @@ export default function WatchRecordNewPage() {
         </InputLabel>
         <InputLabel label="評価" error={errors.rating?.message}>
           <input
-            {...register("rating")}
+            {...register("rating", { valueAsNumber: true })}
             type="number"
             className="input input-sm w-full"
           />
@@ -65,6 +75,13 @@ export default function WatchRecordNewPage() {
         </InputLabel>
         <AppButton type="submit" className="btn btn-primary mt-4">
           作成
+        </AppButton>
+        <AppButton
+          type="button"
+          className="btn btn-outline"
+          onClick={() => router.push("/watch-records")}
+        >
+          戻る
         </AppButton>
       </form>
     </Container>

@@ -5,7 +5,6 @@ export const WatchRecordSchema = z.object({
   id: z.string(),
   title: z.string(),
   watchedOn: z
-    // .date()
     .string()
     .nullable()
     .refine((val) => (val ? dayjs(val).isValid() : true), {
@@ -15,10 +14,12 @@ export const WatchRecordSchema = z.object({
   //
   rating: z.number(),
   memo: z.string(),
-  createdAt: z.string()
+  createdAt: z
+    .string()
     .refine((val) => dayjs(val).isValid())
     .transform((val) => dayjs(val).toDate()),
-  updatedAt: z.string()
+  updatedAt: z
+    .string()
     .refine((val) => dayjs(val).isValid())
     .transform((val) => dayjs(val).toDate()),
 });
@@ -30,9 +31,12 @@ export type WatchRecord = z.infer<typeof WatchRecordSchema>;
 
 export const WatchRecordCreateSchema = z.object({
   title: z.string().min(1).max(50),
-  watchedOn: z.string().nullable(),
+  watchedOn: z
+    .string()
+    .refine((val) => val === "" || dayjs(val).isValid())
+    .transform((val) => (val === "" ? null : new Date(val))),
   rating: z.number().min(0).max(10),
-  memo: z.string().nullable(),
+  memo: z.string().max(500),
 });
 
 export type WatchRecordCreate = z.infer<typeof WatchRecordCreateSchema>;
