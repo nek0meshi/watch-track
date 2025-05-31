@@ -6,6 +6,7 @@ import {
 } from "@/app/schema/watch-record";
 import InputLabel from "@/components/form/InputLabel";
 import Container from "@/components/layout/Container";
+import Loading from "@/components/loading/Loading";
 import BreadcrumbItem from "@/components/nav/BreadcrumbItem";
 import Breadcrumbs from "@/components/nav/Breadcrumbs";
 import PageTitle from "@/components/typography/PageTitle";
@@ -14,6 +15,7 @@ import { useCreateWatchRecord } from "@/hooks/queries/useWatchRecords";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+
 export default function WatchRecordNewPage() {
   const {
     register,
@@ -22,7 +24,7 @@ export default function WatchRecordNewPage() {
   } = useForm({
     resolver: zodResolver(WatchRecordCreateSchema),
   });
-  const { mutate: createWatchRecord } = useCreateWatchRecord();
+  const { mutate: createWatchRecord, isPending } = useCreateWatchRecord();
   const router = useRouter();
 
   const onSubmit = (data: WatchRecordCreate) => {
@@ -37,6 +39,7 @@ export default function WatchRecordNewPage() {
 
   return (
     <Container>
+      <Loading isLoading={isPending} />
       <Breadcrumbs>
         <BreadcrumbItem href="/watch-records">鑑賞ログ一覧</BreadcrumbItem>
         <BreadcrumbItem>鑑賞ログ新規作成</BreadcrumbItem>
