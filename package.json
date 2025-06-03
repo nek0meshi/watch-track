@@ -11,7 +11,9 @@
     "check:fix": "biome check --write",
     "typecheck": "tsc --noEmit",
     "prisma:generate": "prisma generate",
-    "prisma:clean": "rm -rf prisma/generated"
+    "prisma:clean": "rm -rf prisma/generated",
+    "prisma:migrate:dev": "prisma migrate dev",
+    "prisma:migrate:deploy": "prisma migrate deploy"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
